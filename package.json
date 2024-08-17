@@ -1,0 +1,24 @@
+{
+  "name": "webtube",
+  "version": "1.0.0",
+  "description": "the best way to watch video",
+  "repository": {
+    "type": "git",
+    "url": "(https://github.com/Psoyeon1117/wetube)"
+  },
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/node": "^7.25.0",
+    "@babel/preset-env": "^7.25.3",
+    "nodemon": "^3.1.4"
+  }
+}
