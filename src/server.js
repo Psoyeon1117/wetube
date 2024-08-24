@@ -7,6 +7,8 @@ import videoRouter from "./routers/videoRouter";
 
 const app = express();
 const PORT = 4000;
+app.set("view engine", "pug");
+app.set("views", process.cwd() + "/src/views");
 //app이 request에 어떻게 대응할 지를 정해준다.
 app.use(morgan("dev"));				//함수가 모든 url에 대해 middleware로 작용한다.
 
