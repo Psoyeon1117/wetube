@@ -20,8 +20,8 @@ const videos = [
 	  title: "Third Video",
 	  rating: 5,
 	  comments: 2,
-	  createdAt: "2 minutes ago",
 	  views: 59,
+	  createdAt: "2 minutes ago",
 	  id: 3,
 	},
   ];
@@ -44,6 +44,18 @@ export const postEdit = (req,res) => {
 	videos[id - 1].title = title; 
 	return res.redirect(`/video/${id}`);
 };
+export const getUpload = (req ,res) => res.render("upload", {pageTitle:"Upload Video"});
+export const postUpload = (req, res) => {
+	const newVideo = {
+		title: req.body.title,
+		rating: 0,
+		comments: 0,
+		views: 0,
+		createdAt: "just now",
+		id: videos.length + 1,
+	  };
+	  videos.push(newVideo);
+	return res.redirect("/");
+};
 export const search = (req, res) =>res.send("search video");
 export const remove = (req, res) => res.send("remove video");
-export const upload = (req ,res) => res.send("upload video");
