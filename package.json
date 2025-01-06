@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "dependencies": {
     "express": "^4.19.2",

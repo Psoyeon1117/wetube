@@ -1,12 +1,11 @@
-import "./db";
-import "./models/video";
+
 import express from "express";
 import morgan from "morgan";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 const app = express();
-const PORT = 4000;
+
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 //app이 request에 어떻게 대응할 지를 정해준다.
@@ -17,4 +16,4 @@ app.use("/user", userRouter);
 app.use("/video", videoRouter);
 
 //행동 양식이 모두 정해진 후, 서버를 열어 외부에 내보낸다.
-app.listen(PORT, () => console.log("Server listening on port 4000"));
+export default app;

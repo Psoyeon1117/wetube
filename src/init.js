@@ -1,0 +1,6 @@
+import "./db";
+import "./models/video";
+import app from "./server"
+const PORT = 4000;
+
+app.listen(PORT, () => console.log("Server listening on port 4000"));
