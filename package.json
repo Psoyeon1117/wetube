@@ -12,6 +12,7 @@
     "dev": "nodemon --exec babel-node src/init.js"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.19.2",
     "mongoose": "^8.9.3",
     "morgan": "^1.10.0",
