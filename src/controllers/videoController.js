@@ -28,7 +28,7 @@ export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
   if (!video) {
-    return res.render("404", { pageTitle: "video not found" });
+    return res.status(404).render("404", { pageTitle: "video not found" });
   }
   return res.render("watch", { pageTitle: video.title, video: video });
 };
@@ -37,7 +37,7 @@ export const getEdit = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id);
   if (!video) {
-    return res.render("404", { pageTitle: "video not found" });
+    return res.status(404).render("404", { pageTitle: "video not found" });
   }
   console.log(video);
   return res.render("edit", {
@@ -51,7 +51,7 @@ export const postEdit = async (req, res) => {
   const video = await Video.exists({ _id: id }); //특정 데이터가 존재하는지 확인한다. (T/F를 반환함)
   try {
     if (!video) {
-      return res.render("404", { pageTitle: "video not found" });
+      return res.status(404).render("404", { pageTitle: "video not found" });
     }
     await Video.findByIdAndUpdate(id, {
       //id로 데이터를 찾고 새로운 내용으로 업데이트한다.
@@ -61,7 +61,7 @@ export const postEdit = async (req, res) => {
     });
     return res.redirect(`/video/${id}`);
   } catch (error) {
-    res.render("edit", { pageTitle: `Editing ${video.title}`, video: video });
+    res.status(400).render("edit", { pageTitle: `Editing ${video.title}`, video: video });
   }
 };
 
@@ -81,7 +81,7 @@ export const postUpload = async (req, res) => {
     //DB에 저장하는데 시간이 걸리기 때문에, 기다려줘야한다.
     return res.redirect("/");
   } catch (error) {
-    res.render("upload", {
+    res.status(400).render("upload", {
       pageTitle: "Upload Video",
       errorMessage: error._message,
     });
