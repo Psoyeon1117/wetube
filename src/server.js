@@ -1,10 +1,11 @@
 import express from "express";
 import morgan from "morgan";
 import session from "express-session"
+import MongoStore from "connect-mongo";
 import globalRouter from "./routers/globalRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
-import { localsMiddleware } from "./middleware";
+import { localsMiddleware } from  "./middleware";
 
 const app = express();
 
@@ -14,12 +15,13 @@ app.set("views", process.cwd() + "/src/views");
 app.use(morgan("dev")); 	//app.use(): 함수가 모든 url에 대해 middleware로 작용한다.
 app.use(express.urlencoded({ extended: true }));
 
-app.use(session({			//session을 생성한다.
-	secret: "hello",
-	resave: true,
-	saveUninitialized: true,
+app.use(session({				//session을 생성한다.
+	secret: process.env.COOKIE_SECRET,			//쿠키에 sign을 할 때 사용한다. 서버에서 쿠키를 줬다는 것을 증명하기 위해서 sign을 한다.
+	resave: false,				//모든 request마다 세션에 수정사항이 있든 없든 세션을 저장한다.
+	saveUninitialized: false,	//세션 초기화가 발생하지 않아도(세션이 만들어진 후 어떠한 작업도 가해지지 않은 상태) 세션을 저장한다.
 	// => 이 미들웨어를 통해 사이트에 들어오는 모든 유저를 기억할 수 있다.
 	//DB에 연결하지 않으면, 서버가 새로 켜질 때마다 세션의 정보가 초기화된다.
+	store: MongoStore.create({mongoUrl: process.env.DB_URL})
 }));
 
 // app.use((req,res,next)=>{	//세션에 저장된 정보를 보여줌
